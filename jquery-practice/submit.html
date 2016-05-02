@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+  <body>
+    <form class="js-form" action="action_page.php">
+	  First name:<br>
+	  <input type="text" name="firstname" value="Mickey"><br>
+	  Last name:<br>
+	  <input type="text" name="lastname" value="Mouse"><br><br>
+	  <input type="submit" value="Submit">
+	</form>
+
+    <script type="text/javascript">
+      $('.js-form').on('submit', function(event){
+      	event.preventDefault();
+      	if($('[name="firstname"]').val() != "" && $('[name="lastname"]').val() != "") {
+      		$(this).unbind('submit').submit();
+      	}
+      });
+
+      //isFilled?
+      var isFilled = $.makeArray($('input')).reduce(function(result, element){
+      	return $(element).val() !== '' && result
+      }, true);
+
+      function isFilled(elements){
+      	return $.makeArray(elements).reduce(function(result, element){
+	      	return $(element).val() !== '' && result
+	    }, true);
+      }
+    </script>
+  </body>
+</html>

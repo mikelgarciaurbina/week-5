@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+  <body>
+    <p>I like pizza.</p>
+    <h1 id="title">jQuery Exercises</h1>
+    <button class="js-tacos">Tacos</button>
+    <button data-action="do stuff">Do Stuff</button>
+
+    <script type="text/javascript">
+      $('p').on('click', function () {
+        alert('p clicked')
+      })
+      $('#title').on('click', function () {
+        alert('title clicked')
+      })
+      $('.js-tacos').on('click', function () {
+        alert('.js-tacos clicked')
+      })
+      $('[data-action]').on('click', function () {
+        alert('data-action clicked')
+      })
+    </script>
+  </body>
+</html>
