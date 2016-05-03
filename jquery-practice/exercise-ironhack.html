@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ironhack Characters</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Characters!</h1>
+
+    <form>
+      <label>Name <input type="text" class="name"/></label>
+      <label>Occupation <input type="text" class="occupation"/></label>
+      <label>Weapon <input type="text" class="weapon"/></label>
+      <button class="js-submit" type="submit">SUBMIT</button>
+    </form><br>
+
+    <button class="js-characters">Fetch characters</button>
+
+    <ul class="js-character-list"></ul>
+  </body>
+  <script type="text/javascript">
+    var ENDPOINT = 'https://ironhack-characters.herokuapp.com/characters';
+
+    function onSubmit (event) {
+      event.preventDefault();
+      var newCharacter = {
+        name: $('.name').val(),
+        occupation: $('.occupation').val(),
+        weapon: $('.weapon').val()
+      }
+
+      var request = $.post(ENDPOINT, newCharacter);
+
+      function onSaveSuccess (response) {
+        console.debug('BOOM', response);
+        fetchCharacters();
+        $("form")[0].reset();
+      }
+
+      function onSaveFailure (err) {
+        console.error(err.responseJSON);
+      }
+
+      request.done(onSaveSuccess);
+      request.fail(onSaveFailure);
+    }
+
+    $('.js-submit').on('click', onSubmit);
+
+    function fetchCharacters () {
+      $('.js-character-list').html("");
+      var request = $.get(ENDPOINT);
+
+      function handleCharacters (characters) {
+        characters.forEach(function (chr) {
+          $('.js-character-list').append("<li><h2>" + chr.name + "</h2><dl><dt>Occupation:</dt><dd>" + chr.occupation + "</dd><dt>Weapon:</dt><dd>" + chr.weapon + "</dd><dt>Debt:</dt><dd>" + chr.debt + "</dd></dl></li>");
+        });
+      }
+
+      function handleError (err1, err2, err3) {
+        console.error('OH NO!!', err1, err2, err3);
+      }
+
+      request.done(handleCharacters);
+      request.fail(handleError);
+    }
+
+    $('.js-characters').on('click', fetchCharacters);
+  </script>
+</html>
