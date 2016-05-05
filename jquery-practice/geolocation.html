@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Geolocation</title>
+</head>
+<body>
+	<div></div>
+	<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<script>
+		var options = {
+			enableHighAccuracy: true
+		};
+
+		if("geolocation" in navigator) {
+			navigator.geolocation.getCurrentPosition(onLocation, onError, options);
+		} else {
+			console.log("Error");
+		}
+
+		function onLocation(position){
+			$("div").html("<img src='https://maps.googleapis.com/maps/api/staticmap?maptype=roadmap&center=" + position.coords.latitude + "," + position.coords.longitude + "&zoom=14&size=640x400&markers=color:blue%7Clabel:M%7C" + position.coords.latitude + "," + position.coords.longitude + "&key=AIzaSyDxg-EMHiRPgJFvfl8K1VagyY3Cr78rChY' alt='map'>");
+		}
+
+		function onError(error){
+			console.log(error);
+		}
+	</script>
+</body>
+</html>
