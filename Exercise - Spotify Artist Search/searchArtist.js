@@ -46,7 +46,7 @@ function getArtistFromResponse(artists) {
   },'');
 }
 
-$('.js-artist').delegate('.js-zoom', 'click', function(){
+$('.js-artist').on('click', '.js-zoom', function(){
   $.ajax({
     url: urlDetails.replace('#', $(this).find('p').text()),
     data: '',
@@ -75,7 +75,7 @@ function albumToHTML(album) {
   return '<li class="list-group-item js-album-title">' + album.name + '<span class="hide">' + album.id + '</span><ul class="collapse js-tracklist"></ul></li>';
 }
 
-$('.js-album-list').delegate('.js-album-title', 'click', function() {
+$('.js-album-list').on('click', '.js-album-title', function() {
   var tracklist = $(this).find('.js-tracklist');
   if(tracklist.html() == '') {
     $.ajax({
